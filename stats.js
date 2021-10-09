@@ -1,5 +1,5 @@
 const fs = require("fs");
-const filename = "./metadata.json";
+const filename = "./_metadata.json";
 var tally = {};
 
 var res = require(filename);
@@ -23,10 +23,15 @@ for (let i in tally) {
   console.log(i, ":");
   // console.log(attrib);
   let total = sum(attrib);
-  let multiplier = total / 100;
+
+  if (total == 0) {
+    console.log("nothing to sum?");
+    process.exit();
+  }
+  let multiplier = 100 / total;
   for (let v in attrib) {
     let val = attrib[v];
-    //  console.log(v, val, multiplier);
+    // console.log(v, val, multiplier);
     console.log(`${v}: ${parseInt(attrib[v]) * multiplier}%`);
   }
 }
